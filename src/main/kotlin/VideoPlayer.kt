@@ -1,9 +1,29 @@
-import kotlinx.css.*
-import kotlinx.css.properties.*
+
+import kotlinx.css.Color
+import kotlinx.css.Display
+import kotlinx.css.Position
+import kotlinx.css.backgroundColor
+import kotlinx.css.display
+import kotlinx.css.position
+import kotlinx.css.properties.deg
+import kotlinx.css.properties.rotate
+import kotlinx.css.properties.s
+import kotlinx.css.properties.transform
+import kotlinx.css.properties.transition
+import kotlinx.css.px
+import kotlinx.css.right
+import kotlinx.css.top
 import kotlinx.html.js.onClickFunction
-import react.*
-import react.dom.*
-import styled.*
+import react.RBuilder
+import react.RComponent
+import react.RProps
+import react.RState
+import react.ReactElement
+import react.dom.h3
+import styled.animation
+import styled.css
+import styled.styledButton
+import styled.styledDiv
 
 external interface VideoPlayerProps : RProps {
     var video: Video
@@ -18,14 +38,16 @@ class VideoPlayer : RComponent<VideoPlayerProps, RState>() {
                 position = Position.absolute
                 top = 10.px
                 right = 10.px
-                css {
-                    if (props.video.songName == "Do not click this") {
-                        transform {
-                            rotate(360.deg)
+                if (props.video.songName == "Do not click this") {
+                    animation (duration = 4.s, delay = 2.s) {
+                        to {
+                            transform {
+                                rotate(360.deg)
+                            }
                         }
-                        transition(duration = 4.s)
                     }
                 }
+
             }
             h3 {
                 if (props.video.songName == "Do not click this")
@@ -69,6 +91,10 @@ class VideoPlayer : RComponent<VideoPlayerProps, RState>() {
         }
     }
 }
+
+//fun KeyframesBuilder.rotate(handlers: KeyframesBuilder.() -> Unit) {
+//
+//}
 
 fun RBuilder.videoPlayer(handler: VideoPlayerProps.() -> Unit): ReactElement {
     return child(VideoPlayer::class) {
