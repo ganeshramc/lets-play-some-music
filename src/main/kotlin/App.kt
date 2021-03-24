@@ -26,21 +26,18 @@ data class MusicVideo(
 
 external interface AppState : RState {
     var currentSong: Video?
-    var watchedSongs: List<Video>
-    var unwatchedSongs: List<Video>
+    var listOfVideos: List<Video>
 }
 
 class App : RComponent<RProps, AppState>() {
     override fun AppState.init() {
-        unwatchedSongs = listOf(
+        listOfVideos = listOf(
             MusicVideo(1, "Stayin' Alive","Bee Gees",
                 "https://www.youtube.com/watch?v=fNFzfwLM72c"),
             MusicVideo(2, "September", "Earth, Wind and Fire",
                 "https://www.youtube.com/watch?v=Gs069dndIYk"),
             MusicVideo(3, "Old Town Road", "Lil Nas X",
-                "https://www.youtube.com/watch?v=w2Ov5jzm3j8")
-        )
-        watchedSongs = listOf(
+                "https://www.youtube.com/watch?v=w2Ov5jzm3j8"),
             MusicVideo(4, "Forever", "Chris",
                 "https://www.youtube.com/watch?v=5sMKX22BHeE"),
             MusicVideo(5, "Do not click this", "Seriously",
@@ -60,19 +57,7 @@ class App : RComponent<RProps, AppState>() {
                 +"Songs to watch"
             }
             musicVideoList {
-                musicVideos = state.unwatchedSongs
-                selectedSong = state.currentSong
-                onSelectSong = { video ->
-                    setState {
-                        currentSong = video
-                    }
-                }
-            }
-            h3 {
-                +"Songs watched"
-            }
-            musicVideoList {
-                musicVideos = state.watchedSongs
+                musicVideos = state.listOfVideos
                 selectedSong = state.currentSong
                 onSelectSong = { video ->
                     setState {
@@ -83,20 +68,6 @@ class App : RComponent<RProps, AppState>() {
             state.currentSong?.let { currentVideo ->
                 videoPlayer {
                     video = currentVideo
-                    unwatchedVideo = currentVideo in state.unwatchedSongs
-                    onWatchedButtonPressed = {
-                        if (video in state.unwatchedSongs) {
-                            setState {
-                                unwatchedSongs -= video
-                                watchedSongs += video
-                            }
-                        } else {
-                            setState {
-                                watchedSongs -= video
-                                unwatchedSongs += video
-                            }
-                        }
-                    }
                 }
             }
         }

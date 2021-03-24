@@ -1,7 +1,12 @@
-import kotlinx.browser.window
+
 import kotlinx.html.js.onClickFunction
-import react.*
-import react.dom.*
+import react.RBuilder
+import react.RComponent
+import react.RProps
+import react.RState
+import react.ReactElement
+import react.dom.b
+import react.dom.p
 
 external interface MusicVideoListProps: RProps {
     var musicVideos: List<Video>
@@ -26,8 +31,13 @@ class MusicVideoList: RComponent<MusicVideoListProps, RState>() {
                 }
                 if (video == props.selectedSong) {
                     +"▶ "
+                    b {
+                        +"${video.songName} - ${video.singer}"
+                    }
                 }
-                +"${video.songName} - ${video.singer}"
+                else {
+                    +"${video.songName} - ${video.singer}"
+                }
             }
         }
     }
