@@ -39,7 +39,7 @@ class VideoPlayer : RComponent<VideoPlayerProps, RState>() {
                 top = 10.px
                 right = 10.px
                 if (props.video.songName == "Do not click this") {
-                    animation (duration = 4.s, delay = 2.s) {
+                    animation (duration = 4.s, delay = 1.s) {
                         to {
                             transform {
                                 rotate(360.deg)
@@ -91,10 +91,6 @@ class VideoPlayer : RComponent<VideoPlayerProps, RState>() {
         }
     }
 }
-
-//fun KeyframesBuilder.rotate(handlers: KeyframesBuilder.() -> Unit) {
-//
-//}
 
 fun RBuilder.videoPlayer(handler: VideoPlayerProps.() -> Unit): ReactElement {
     return child(VideoPlayer::class) {

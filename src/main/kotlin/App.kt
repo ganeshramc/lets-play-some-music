@@ -1,11 +1,13 @@
-import kotlinx.css.*
-import react.*
+
+import react.RBuilder
+import react.RComponent
+import react.RProps
+import react.RState
 import react.dom.div
 import react.dom.h1
 import react.dom.h3
-import react.dom.img
-import styled.css
-import styled.styledDiv
+import react.dom.p
+import react.setState
 
 
 external interface Video {
@@ -49,6 +51,9 @@ class App : RComponent<RProps, AppState>() {
     override fun RBuilder.render() {
         h1 {
             +"Great songs to watch!"
+        }
+        p {
+            +"Click any video you want to watch. Just not the last one..."
         }
         div {
             h3 {
